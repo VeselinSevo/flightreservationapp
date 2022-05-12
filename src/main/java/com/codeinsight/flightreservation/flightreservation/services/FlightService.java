@@ -5,6 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 public interface FlightService {
-    public List<Flight> findAllFLights();
-    public List<Flight> findFLights(String to, String from, Date departureDate);
+    public List<Flight> findAllFlights();
+    public List<Flight> findFlights(String to, String from, Date departureDate);
 }

@@ -9,7 +9,7 @@
       <table>
          <tr>
             <th>Flight Number:</th>
-            <th>Operating Airlanes:</th>
+            <th>Operating Airlines:</th>
             <th>From:</th>
             <th>To:</th>
             <th>Departure Date:</th>
@@ -21,8 +21,8 @@
             <td>${flight.operatingAirlines}</td>
             <td>${flight.departureCity}</td>
             <td>${flight.arrivalCity}</td>
-            <td>${flight.departureDate}</td>
             <td>${flight.estimatedDepartureTime}</td>
+            <td><a href="showBooking?flightId=${flight.id}">Book this flight</a></td>
          </tr>
          </c:forEach>
       </table>

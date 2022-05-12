@@ -16,20 +16,20 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/registration")
+    @RequestMapping("registration")
     public String showRegistrationPage() {
         return "login/register";
     }
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = "register", method = RequestMethod.POST)
     public String registerUser(@ModelAttribute("user") User user){
         userService.saveUser(user);
         return "login/login";
     }
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "login", method = RequestMethod.POST)
     public String loginUser(@RequestParam("email") String email, @RequestParam("password") String password, ModelMap modelMap){
         User user = userService.findUserByEmail(email);
         if(user != null && user.getPassword().equals(password)){
-            return "findFlights";
+            return "flights/findFlights";
         }else{
             modelMap.addAttribute("error", "Invalid Username or Password. Please try again.");
         }
