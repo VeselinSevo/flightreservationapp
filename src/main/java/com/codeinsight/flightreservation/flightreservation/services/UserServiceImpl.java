@@ -4,7 +4,6 @@ import com.codeinsight.flightreservation.flightreservation.entities.User;
 import com.codeinsight.flightreservation.flightreservation.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service

@@ -5,7 +5,7 @@
 
    <body>
       <h2>Register:</h2>
-      <form action = "registerUser" method="post">
+      <form action = "register" method="post">
           <pre>
               First Name: <input type="text" name="firstName" placeholder="First Name"><br/>
               Last Name: <input type="text"  name="lastName" placeholder="Last Name"><br/>

@@ -18,9 +18,9 @@ public class UserController {
 
     @RequestMapping("/registration")
     public String showRegistrationPage() {
-        return "login/registerUser";
+        return "login/register";
     }
-    @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerUser(@ModelAttribute("user") User user){
         userService.saveUser(user);
         return "login/login";
@@ -29,7 +29,7 @@ public class UserController {
     public String loginUser(@RequestParam("email") String email, @RequestParam("password") String password, ModelMap modelMap){
         User user = userService.findUserByEmail(email);
         if(user != null && user.getPassword().equals(password)){
-            return "login/findFlights";
+            return "findFlights";
         }else{
             modelMap.addAttribute("error", "Invalid Username or Password. Please try again.");
         }
