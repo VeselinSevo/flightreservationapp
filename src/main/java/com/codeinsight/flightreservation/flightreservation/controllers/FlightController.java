@@ -17,13 +17,16 @@ public class FlightController {
     @Autowired
     FlightService flightService;
 
-    @RequestMapping("/find-flights")
+    @RequestMapping("find-flights")
     public String findFlights(@RequestParam("from") String from,
                               @RequestParam("to") String to,
                               @RequestParam("departureDate") @DateTimeFormat(pattern="dd-MM-yyyy") Date departureDate,
                               ModelMap modelMap) {
-        List<Flight> flights = flightService.findFLights(from, to, departureDate);
+        List<Flight> flights = flightService.findFlights(from, to, departureDate);
+        if(flights.isEmpty()) {
+            return "flights/displayFlightsEmpty";
+        }
         modelMap.addAttribute("flights", flights);
-        return "displayFlights";
+        return "flights/displayFlights";
     }
 }

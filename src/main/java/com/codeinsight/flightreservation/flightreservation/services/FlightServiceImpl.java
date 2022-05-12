@@ -14,11 +14,11 @@ public class FlightServiceImpl implements FlightService {
     private FlightRepository flightRepository;
 
     @Override
-    public List<Flight> findAllFLights() {
+    public List<Flight> findAllFlights() {
         return flightRepository.findAll();
     }
 
-    public List<Flight> findFLights(String to, String from, Date departureDate) {
+    public List<Flight> findFlights(String to, String from, Date departureDate) {
         return flightRepository.findFlights(to, from, departureDate);
     }
 }
