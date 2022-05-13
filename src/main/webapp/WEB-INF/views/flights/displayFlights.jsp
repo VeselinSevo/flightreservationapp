@@ -13,7 +13,6 @@
             <th>From:</th>
             <th>To:</th>
             <th>Departure Date:</th>
-            <th>Est Departure Date:</th>
          </tr>
          <c:forEach var="flight" items="${flights}">
          <tr>
@@ -22,7 +21,7 @@
             <td>${flight.departureCity}</td>
             <td>${flight.arrivalCity}</td>
             <td>${flight.estimatedDepartureTime}</td>
-            <td><a href="showBooking?flightId=${flight.id}">Book this flight</a></td>
+            <td><a href="show-booking?flightId=${flight.id}">Book this flight</a></td>
          </tr>
          </c:forEach>
       </table>

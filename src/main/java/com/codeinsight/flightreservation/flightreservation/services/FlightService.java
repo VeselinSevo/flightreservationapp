@@ -7,4 +7,9 @@ import java.util.List;
 public interface FlightService {
     public List<Flight> findAllFlights();
     public List<Flight> findFlights(String to, String from, Date departureDate);
+    Flight findFlightById(Long flightId);
+    Flight saveFlight(Flight saveFlight);
+    void deleteFlight(Flight delFlight);
+    Flight editFlight(Flight editFlight);
+
 }
