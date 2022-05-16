@@ -18,23 +18,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUser(User user) {
-        return getUserById(user.getId());
+    public void deleteUser(User delUser) {
+        userRepository.delete(delUser);
     }
 
     @Override
-    public void deleteUser(User user) {
-        userRepository.delete(user);
-    }
-
-    @Override
-    public User editUser(User user) {
-            User editedUser = getUserById(user.getId());
-            editedUser.setFirstName(user.getFirstName());
-            editedUser.setLastName(user.getLastName());
-            editedUser.setEmail(user.getEmail());
-            editedUser.setPassword(user.getPassword());
-            return userRepository.save(editedUser);
+    public User editUser(User editUser) {
+            User newUser = findUserById(editUser.getId());
+            newUser.setFirstName(editUser.getFirstName());
+            newUser.setLastName(editUser.getLastName());
+            newUser.setEmail(editUser.getEmail());
+            newUser.setPassword(editUser.getPassword());
+            return userRepository.save(newUser);
     }
 
     @Override
@@ -43,7 +38,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(long id) {
+    public User findUserById(long id) {
         if(userRepository.findById(id).isPresent()) {
             return userRepository.findById(id).get();
         } else {
