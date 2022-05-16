@@ -13,13 +13,13 @@
               Arrival City: ${flight.arrivalCity}
               Departure time: ${flight.estimatedDepartureTime}
           </pre>
-      <h2>Register:</h2>
+      <h2>Passenger Details:</h2>
           <form action = "book" method="post">
               <pre>
                   First Name: <input type="text" name="firstName" placeholder="First Name"><br/>
                   Last Name: <input type="text"  name="lastName" placeholder="Last Name"><br/>
                   Email: <input type="text"  name="email" placeholder="Email"><br/>
-                  Phone: <input type="password" name ="phone" placeholder="Phone"><br/>
+                  Phone: <input type="text" name ="phone" placeholder="Phone"><br/>
               </pre>
       <h2>Card Details:</h2>
           <pre>

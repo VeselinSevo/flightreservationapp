@@ -1,13 +1,18 @@
 package com.codeinsight.flightreservation.flightreservation.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
 public class Passenger extends AbstractEntity {
 
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
+    @Column(name = "email")
     private String email;
+    @Column(name = "phone")
     private String phone;
 
     public String getFirstName() {
