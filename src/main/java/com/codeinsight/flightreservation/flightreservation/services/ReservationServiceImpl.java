@@ -6,6 +6,8 @@ import com.codeinsight.flightreservation.flightreservation.entities.Passenger;
 import com.codeinsight.flightreservation.flightreservation.entities.Reservation;
 import com.codeinsight.flightreservation.flightreservation.repos.PassengerRepository;
 import com.codeinsight.flightreservation.flightreservation.repos.ReservationRepository;
+import com.codeinsight.flightreservation.flightreservation.util.EmailUtil;
+import com.codeinsight.flightreservation.flightreservation.util.PDFGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,11 @@ public class ReservationServiceImpl implements ReservationService {
     @Autowired
     ReservationRepository reservationRepository;
 
+    @Autowired
+    PDFGenerator pdfGenerator;
+
+    @Autowired
+    EmailUtil emailUtil;
     @Override
     public Reservation findReservationById(Long id) {
         if(reservationRepository.findById(id).isPresent()) {
@@ -49,6 +56,9 @@ public class ReservationServiceImpl implements ReservationService {
         reservation.setCheckedIn(false);
 
         Reservation savedReservation = reservationRepository.save(reservation);
+        pdfGenerator.generateItinerary(savedReservation,
+                "C://Users//Veselin//Desktop//Reservations//reservation_" + savedReservation.getId() + ".pdf");
+        emailUtil.sendItinerary(passenger.getEmail(),"C://Users//Veselin//Desktop//Reservations//reservation_" + savedReservation.getId() + ".pdf");
         return savedReservation;
     }
 }
