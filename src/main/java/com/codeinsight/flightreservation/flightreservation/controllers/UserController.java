@@ -16,9 +16,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("registration")
-    public String showRegistrationPage() {
+    @RequestMapping("show-register")
+    public String showRegisterPage() {
         return "login/register";
+    }
+    @RequestMapping("show-login")
+    public String showLoginPage() {
+        return "login/login";
     }
     @RequestMapping(value = "register", method = RequestMethod.POST)
     public String registerUser(@ModelAttribute("user") User user){
