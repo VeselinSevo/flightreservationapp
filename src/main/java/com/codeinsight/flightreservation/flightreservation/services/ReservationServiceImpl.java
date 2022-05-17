@@ -4,7 +4,6 @@ import com.codeinsight.flightreservation.flightreservation.dto.ReservationReques
 import com.codeinsight.flightreservation.flightreservation.entities.Flight;
 import com.codeinsight.flightreservation.flightreservation.entities.Passenger;
 import com.codeinsight.flightreservation.flightreservation.entities.Reservation;
-import com.codeinsight.flightreservation.flightreservation.repos.FlightRepository;
 import com.codeinsight.flightreservation.flightreservation.repos.PassengerRepository;
 import com.codeinsight.flightreservation.flightreservation.repos.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
+
 
     @Autowired
     FlightService flightService;
@@ -21,6 +21,13 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Autowired
     ReservationRepository reservationRepository;
+
+    @Override
+    public Reservation findReservationById(Long id) {
+        if(reservationRepository.findById(id).isPresent()) {
+            return reservationRepository.findById(id).get();
+        } throw new RuntimeException("Reservation not found");
+    }
 
     @Override
     public Reservation bookFlight(ReservationRequest request) {
