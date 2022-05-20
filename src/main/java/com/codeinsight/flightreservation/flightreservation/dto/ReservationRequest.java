@@ -75,6 +75,17 @@ public class ReservationRequest {
         this.CVV = CVV;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "ReservationRequest{" +
+                "flightId=" + flightId +
+                ", passengerFirstName='" + passengerFirstName + '\'' +
+                ", passengerLastName='" + passengerLastName + '\'' +
+                ", passengerEmail='" + passengerEmail + '\'' +
+                ", passengerPhone='" + passengerPhone + '\'' +
+                ", cardNumber='" + cardNumber + '\'' +
+                ", expirationDate='" + expirationDate + '\'' +
+                ", CVV='" + CVV + '\'' +
+                '}';
+    }
 }
