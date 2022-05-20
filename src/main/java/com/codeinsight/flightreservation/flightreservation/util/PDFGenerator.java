@@ -24,9 +24,7 @@ public class PDFGenerator {
             document.open();
             document.add(generateTable(reservation));
             document.close();
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
+        } catch (DocumentException | FileNotFoundException e) {
             e.printStackTrace();
         }
 
