@@ -12,10 +12,14 @@ import com.codeinsight.flightreservation.flightreservation.util.PDFGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
+
+    @Value("${com.codeinsight.flightreservation.itinerary.dirpath}")
+    private String ITINERARY_DIR;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ReservationServiceImpl.class);
 
@@ -65,9 +69,9 @@ public class ReservationServiceImpl implements ReservationService {
         LOGGER.info("Saving the reservation: " + reservation);
         Reservation savedReservation = reservationRepository.save(reservation);
         pdfGenerator.generateItinerary(savedReservation,
-                "C://Users//Veselin//Desktop//Reservations//reservation_" + savedReservation.getId() + ".pdf");
+                ITINERARY_DIR + savedReservation.getId() + ".pdf");
         LOGGER.info("Generating the itinerary ");
-        emailUtil.sendItinerary(passenger.getEmail(),"C://Users//Veselin//Desktop//Reservations//reservation_" + savedReservation.getId() + ".pdf");
+        emailUtil.sendItinerary(passenger.getEmail(),ITINERARY_DIR + savedReservation.getId() + ".pdf");
         LOGGER.info("Sending itinerary to email: ");
         return savedReservation;
     }
