@@ -1,5 +1,7 @@
 package com.codeinsight.flightreservation.flightreservation.entities;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.sql.Timestamp;
@@ -17,9 +19,11 @@ public class Flight extends AbstractEntity {
     @Column(name = "arrival_city")
     private String arrivalCity;
     @Column(name = "date_of_departure")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date departureDate;
     @Column(name = "estimated_departure_time")
-    private Timestamp estimatedDepartureTime;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private Date estimatedDepartureTime;
 
     public String getFlightNumber() {
         return flightNumber;
@@ -61,11 +65,11 @@ public class Flight extends AbstractEntity {
         this.departureDate = departureDate;
     }
 
-    public Timestamp getEstimatedDepartureTime() {
+    public Date getEstimatedDepartureTime() {
         return estimatedDepartureTime;
     }
 
-    public void setEstimatedDepartureTime(Timestamp estimatedDepartureTime) {
+    public void setEstimatedDepartureTime(Date estimatedDepartureTime) {
         this.estimatedDepartureTime = estimatedDepartureTime;
     }
 

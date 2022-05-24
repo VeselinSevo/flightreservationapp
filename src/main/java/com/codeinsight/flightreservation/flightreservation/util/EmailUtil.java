@@ -1,5 +1,6 @@
 package com.codeinsight.flightreservation.flightreservation.util;
 
+import com.codeinsight.flightreservation.flightreservation.entities.Flight;
 import com.codeinsight.flightreservation.flightreservation.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,6 +47,20 @@ public class EmailUtil {
             helper.setSubject(REGISTRATION_EMAIL_SUBJECT);
             helper.setTo(to);
             helper.setText("Hello " + user.getFirstName() + ", you have successfully registered to Flight Reservation application");
+            mailSender.send(message);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void sendNewFlightAddedToEmail(String to, Flight flight) {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+        try {
+            helper.setSubject("New Flight Added");
+            helper.setTo(to);
+            helper.setText("New Flight Added:\n" + "From: "+ flight.getDepartureCity() + "To: " + flight.getArrivalCity());
             mailSender.send(message);
         } catch (MessagingException e) {
             e.printStackTrace();

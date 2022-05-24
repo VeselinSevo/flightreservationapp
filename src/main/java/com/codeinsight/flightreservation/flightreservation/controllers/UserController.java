@@ -36,10 +36,13 @@ public class UserController {
     }
     @RequestMapping(value = "register", method = RequestMethod.POST)
     public String registerUser(@ModelAttribute("user") User user){
+        if(user.getSubscribed()==null){             //Pitati Vukasina
+            user.setSubscribed("not subscribed");
+        }
         LOGGER.info("Inside registerUser(), USER: " + user);
-        LOGGER.info("Sending registered successfully massage to email: ");
-        emailUtil.sendRegisterToEmail(user.getEmail(), user);
         userService.saveUser(user);
+        emailUtil.sendRegisterToEmail(user.getEmail(), user);
+        LOGGER.info("Sending registered successfully massage to email: ");
         return "login/login";
     }
     @RequestMapping(value = "login", method = RequestMethod.POST)

@@ -2,6 +2,7 @@ package com.codeinsight.flightreservation.flightreservation.services;
 
 import com.codeinsight.flightreservation.flightreservation.entities.Flight;
 import com.codeinsight.flightreservation.flightreservation.repos.FlightRepository;
+import com.codeinsight.flightreservation.flightreservation.util.EmailUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Date;
@@ -9,6 +10,12 @@ import java.util.List;
 
 @Service
 public class FlightServiceImpl implements FlightService {
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    EmailUtil emailUtil;
 
     @Autowired
     private FlightRepository flightRepository;
@@ -31,7 +38,11 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public Flight saveFlight(Flight saveFlight) {
-        return flightRepository.save(saveFlight);
+        Flight savedFlight = flightRepository.save(saveFlight);
+        for (String email: userService.findSubscribedUsersEmails()){
+            emailUtil.sendNewFlightAddedToEmail(email, savedFlight);
+        }
+        return savedFlight;
     }
 
     @Override
@@ -48,6 +59,13 @@ public class FlightServiceImpl implements FlightService {
         newFlight.setArrivalCity(editFlight.getArrivalCity());
         newFlight.setDepartureDate(editFlight.getDepartureDate());
         newFlight.setEstimatedDepartureTime(editFlight.getEstimatedDepartureTime());
-        return newFlight;
+        return flightRepository.save(newFlight);
+    }
+
+    @Override
+    public List<Flight> findFlightsWithParams(Long flightId, String flightNumber, String operatingAirlines,
+                                              String departureCity, String arrivalCity) {
+        return flightRepository.findFlightsWithParams(flightId, flightNumber, operatingAirlines,
+                departureCity, arrivalCity);
     }
 }

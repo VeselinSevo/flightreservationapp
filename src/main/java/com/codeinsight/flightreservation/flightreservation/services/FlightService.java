@@ -11,5 +11,8 @@ public interface FlightService {
     Flight saveFlight(Flight saveFlight);
     void deleteFlight(Flight delFlight);
     Flight editFlight(Flight editFlight);
+    public List<Flight> findFlightsWithParams(Long flightId, String flightNumber,
+                                             String operatingAirlines, String departureCity,
+                                             String arrivalCity);
 
 }
