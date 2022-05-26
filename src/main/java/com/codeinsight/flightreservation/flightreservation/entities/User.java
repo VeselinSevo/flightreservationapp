@@ -14,6 +14,8 @@ public class User extends AbstractEntity {
     private String email;
     @Column(name = "password")
     private String password;
+    @Column(name = "subscribed")
+    private String subscribed;
 
     public String getFirstName() {
         return firstName;
@@ -55,5 +57,13 @@ public class User extends AbstractEntity {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    public String getSubscribed() {
+        return subscribed;
+    }
+
+    public void setSubscribed(String subscribed) {
+        this.subscribed = subscribed;
     }
 }

@@ -12,6 +12,7 @@
               User Name: <input type="text"  name="email" placeholder="Enter Your Email"><br/>
               Password: <input type="password" name ="password" placeholder="Password"><br/>
               Confirm Password: <input type="password" name="confirmPassword" placeholder="Confirm Password"><br/>
+              Would you like to get notified when new flight is added? <input type = "checkbox" name = "subscribed" value="subscribed"><br/>
               <input type ="submit" value = "register"><br/>
           </pre>
       </form>

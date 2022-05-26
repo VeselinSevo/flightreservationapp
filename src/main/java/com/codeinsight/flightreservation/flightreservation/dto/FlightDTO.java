@@ -1,29 +1,20 @@
-package com.codeinsight.flightreservation.flightreservation.entities;
+package com.codeinsight.flightreservation.flightreservation.dto;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.util.Date;
 
-@Entity
-public class Flight extends AbstractEntity {
+public class FlightDTO {
 
-    @Column(name = "flight_number")
+    private Long id;
     private String flightNumber;
-    @Column(name = "operating_airlines")
     private String operatingAirlines;
-    @Column(name = "departure_city")
     private String departureCity;
-    @Column(name = "arrival_city")
     private String arrivalCity;
-    @Column(name = "date_of_departure")
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date departureDate;
-    @Column(name = "estimated_departure_time")
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
     private Date estimatedDepartureTime;
 
     public String getFlightNumber() {
