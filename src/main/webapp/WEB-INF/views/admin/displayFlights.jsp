@@ -8,11 +8,10 @@
       <h2>All Flights:</h2>
 
       <form action = "search-flight-by-params">
-      Flight Id: <input type="text" value="" name="flightId"><br/>
-      Flight Number: <input type="text" value="" name="flightNumber"><br/>
-      Operating Airlines: <input type="text" value="" name="operatingAirlines"><br/>
-      Departure City: <input type="text" value="" name="departureCity"><br/>
-      Arrival City: <input type="text" value="" name="arrivalCity"><br/>
+      Flight Number: <input type="text" value="${flightNumber}" name="flightNumber"><br/>
+      Operating Airlines: <input type="text" value="${operatingAirlines}" name="operatingAirlines"><br/>
+      Departure City: <input type="text" value="${departureCity}" name="departureCity"><br/>
+      Arrival City: <input type="text" value="${arrivalCity}" name="arrivalCity"><br/>
       <input type = "submit" value = "Search"/>
       </form>
 

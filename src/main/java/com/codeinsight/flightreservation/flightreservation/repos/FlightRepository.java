@@ -15,13 +15,11 @@ public interface FlightRepository extends JpaRepository<Flight, Long> {
                              @Param("arrival_city") String to,
                              @Param("date_of_departure") Date departureDate);
 
-@Query(value = "SELECT * FROM flight WHERE id LIKE :flightId% " +
-        "AND flight_number LIKE :flightNumber% " +
+@Query(value = "SELECT * FROM flight WHERE flight_number LIKE :flightNumber% " +
         "AND operating_airlines LIKE :operatingAirlines% " +
         "AND departure_city LIKE :departureCity% " +
         "AND arrival_city LIKE :arrivalCity%", nativeQuery = true)
-    List<Flight> findFlightsWithParams(@Param("flightId") Long flightId,
-                                       @Param("flightNumber") String flightNumber,
+    List<Flight> findFlightsWithParams(@Param("flightNumber") String flightNumber,
                                        @Param("operatingAirlines") String operatingAirlines,
                                        @Param("departureCity") String departureCity,
                                        @Param("arrivalCity") String arrivalCity);

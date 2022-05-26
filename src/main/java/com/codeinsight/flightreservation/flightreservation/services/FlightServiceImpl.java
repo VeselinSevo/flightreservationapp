@@ -63,9 +63,9 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public List<Flight> findFlightsWithParams(Long flightId, String flightNumber, String operatingAirlines,
+    public List<Flight> findFlightsWithParams(String flightNumber, String operatingAirlines,
                                               String departureCity, String arrivalCity) {
-        return flightRepository.findFlightsWithParams(flightId, flightNumber, operatingAirlines,
+        return flightRepository.findFlightsWithParams(flightNumber, operatingAirlines,
                 departureCity, arrivalCity);
     }
 }

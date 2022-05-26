@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -51,6 +52,10 @@ public class FlightController {
     public String showDisplayFlights(ModelMap modelMap){
         List<Flight> allFlights = flightService.findAllFlights();
         modelMap.addAttribute("flights", allFlights);
+        modelMap.addAttribute("flightNumber", null);
+        modelMap.addAttribute("operatingAirlines", null);
+        modelMap.addAttribute("departureCity", null);
+        modelMap.addAttribute("arrivalCity", null);
         return "admin/displayFlights";
     }
 
@@ -68,8 +73,14 @@ public class FlightController {
     }
 
     @RequestMapping("show-edit")
-    public String showEdit(@RequestParam("flightId") Long id, ModelMap modelMap){
+    public String showEdit(@RequestParam("flightId") Long id, ModelMap modelMap) throws ParseException {
         Flight selectedFlight = flightService.findFlightById(id);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        modelMap.addAttribute("parsedEstimatedDepartureTime", dateFormat.format(selectedFlight.getEstimatedDepartureTime()));
+        SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd-MM-yyyy");
+        modelMap.addAttribute("parsedDepartureDate", dateTimeFormat.format(selectedFlight.getDepartureDate()));
+
         modelMap.addAttribute("flight", selectedFlight);
         return "admin/editFlight";
     }
@@ -83,7 +94,7 @@ public class FlightController {
     }
 
     @RequestMapping("delete-flight")
-    public String deleteFlight(@RequestParam("flightId") Long id, ModelMap modelMap){
+    public String deleteFlight(@RequestParam("flightId") @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss") Long id, ModelMap modelMap){
         Flight selectedFlight = flightService.findFlightById(id);
         flightService.deleteFlight(selectedFlight);
         List<Flight> flights = flightService.findAllFlights();
@@ -92,16 +103,18 @@ public class FlightController {
     }
 
     @RequestMapping("search-flight-by-params")
-    public String searchFlight(@RequestParam("flightId") Long id,
-                                     @RequestParam("flightNumber") String flightNumber,
+    public String searchFlight(@RequestParam("flightNumber") String flightNumber,
                                      @RequestParam("operatingAirlines") String operatingAirlines,
                                      @RequestParam("departureCity") String departureCity,
                                      @RequestParam("arrivalCity") String arrivalCity,
                                      ModelMap modelMap){
-        List<Flight> flights = flightService.findFlightsWithParams(id, flightNumber, operatingAirlines, departureCity,
+        List<Flight> flights = flightService.findFlightsWithParams(flightNumber, operatingAirlines, departureCity,
                 arrivalCity);
         modelMap.addAttribute("flights", flights);
+        modelMap.addAttribute("flightNumber", flightNumber);
+        modelMap.addAttribute("operatingAirlines", operatingAirlines);
+        modelMap.addAttribute("departureCity", departureCity);
+        modelMap.addAttribute("arrivalCity", arrivalCity);
         return "admin/displayFlights";
     }
-
 }
