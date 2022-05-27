@@ -1,6 +1,5 @@
 package com.codeinsight.flightreservation.flightreservation.services;
 
-import com.codeinsight.flightreservation.flightreservation.controllers.FlightController;
 import com.codeinsight.flightreservation.flightreservation.dto.ReservationRequest;
 import com.codeinsight.flightreservation.flightreservation.entities.Flight;
 import com.codeinsight.flightreservation.flightreservation.entities.Passenger;

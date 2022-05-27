@@ -60,7 +60,7 @@ public class EmailUtil {
         try {
             helper.setSubject("New Flight Added");
             helper.setTo(to);
-            helper.setText("New Flight Added:\n" + "From: "+ flight.getDepartureCity() + "To: " + flight.getArrivalCity());
+            helper.setText("New Flight Added: \n" + "From: "+ flight.getDepartureCity() + " To: " + flight.getArrivalCity());
             mailSender.send(message);
         } catch (MessagingException e) {
             e.printStackTrace();

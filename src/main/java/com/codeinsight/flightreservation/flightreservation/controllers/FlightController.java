@@ -13,8 +13,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -48,7 +46,7 @@ public class FlightController {
         LOGGER.info("Inside findFlights(), flights found are" + flights);
         return "flights/displayFlights";
     }
-    @RequestMapping("display-flights")
+    @RequestMapping("admin/display-flights")
     public String showDisplayFlights(ModelMap modelMap){
         List<Flight> allFlights = flightService.findAllFlights();
         modelMap.addAttribute("flights", allFlights);
@@ -59,12 +57,12 @@ public class FlightController {
         return "admin/displayFlights";
     }
 
-    @RequestMapping("show-add")
+    @RequestMapping("admin/show-add")
     public String showAddFlight(){
         return "admin/addFlight";
     }
 
-    @RequestMapping("add-flight")
+    @RequestMapping("admin/add-flight")
     public String addFlight(@ModelAttribute("flight") Flight flight, ModelMap modelMap){
         flightService.saveFlight(flight);
         String msg = "Added flight successfully with id: " + flight.getId();
@@ -72,7 +70,7 @@ public class FlightController {
         return "admin/addFlight";
     }
 
-    @RequestMapping("show-edit")
+    @RequestMapping("admin/show-edit")
     public String showEdit(@RequestParam("flightId") Long id, ModelMap modelMap) throws ParseException {
         Flight selectedFlight = flightService.findFlightById(id);
 
@@ -85,7 +83,7 @@ public class FlightController {
         return "admin/editFlight";
     }
 
-    @RequestMapping("edit-flight")
+    @RequestMapping("admin/edit-flight")
     public String editFlight(@ModelAttribute("flight") Flight flight, ModelMap modelMap){
         Flight editedFlight = flightService.editFlight(flight);
         String msg = "Flight successfully edited";
@@ -93,7 +91,7 @@ public class FlightController {
         return "admin/editFlight";
     }
 
-    @RequestMapping("delete-flight")
+    @RequestMapping("admin/delete-flight")
     public String deleteFlight(@RequestParam("flightId") @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss") Long id, ModelMap modelMap){
         Flight selectedFlight = flightService.findFlightById(id);
         flightService.deleteFlight(selectedFlight);
@@ -102,7 +100,7 @@ public class FlightController {
         return "admin/displayFlights";
     }
 
-    @RequestMapping("search-flight-by-params")
+    @RequestMapping("admin/search-flight-by-params")
     public String searchFlight(@RequestParam("flightNumber") String flightNumber,
                                      @RequestParam("operatingAirlines") String operatingAirlines,
                                      @RequestParam("departureCity") String departureCity,
